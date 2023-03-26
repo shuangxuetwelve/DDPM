@@ -24,3 +24,8 @@ class MNIST(torchvision.datasets.MNIST):
         else:
             self.cache[idx] = super().__getitem__(idx)
             return self.cache[idx]
+
+def getSavedFilePath(saved_filename_prefix, learning_rate):
+    """Get the file path of the saved .pt file."""
+
+    return f'saved/{saved_filename_prefix}-{learning_rate}.pt'
