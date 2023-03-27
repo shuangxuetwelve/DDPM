@@ -25,7 +25,10 @@ class MNIST(torchvision.datasets.MNIST):
             self.cache[idx] = super().__getitem__(idx)
             return self.cache[idx]
 
-def getSavedFilePath(saved_filename_prefix, learning_rate):
+def getSavedFilePath(saved_filename_prefix, learning_rate, use_learning_rate_decay):
     """Get the file path of the saved .pt file."""
 
-    return f'saved/{saved_filename_prefix}-{learning_rate}.pt'
+    # Whether add -decay to the filename.
+    add_decay = lambda use_learning_rate_decay: '-decay' if use_learning_rate_decay else ''
+
+    return f'saved/{saved_filename_prefix}-{learning_rate}{add_decay(use_learning_rate_decay)}.pt'
