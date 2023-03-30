@@ -77,13 +77,14 @@ class CelebA(torchvision.datasets.CelebA):
 
     cache = {}
 
-    def __init__(self, path, split='train', transform=None):
+    def __init__(self, path, split='train', transform=None, cacheOnInit=True):
 
         super().__init__(path, download=True, split=split, transform=transform)
 
         # Access all samples to pre-cache them.
-        for idx in range(self.__len__()):
-            self.__getitem__(idx)
+        if cacheOnInit:
+            for idx in range(self.__len__()):
+                self.__getitem__(idx)
 
     def __len__(self):
 
